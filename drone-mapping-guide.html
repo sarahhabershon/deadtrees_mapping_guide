@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drone Mapping Guide — deadtrees.earth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1B5E35;
+    --green-light: #E8F3EB;
+    --green-mid: #eef3f0;
+    --text: #111827;
+    --text-muted: #6b7280;
+    --text-soft: #374151;
+    --border: #e5e7eb;
+    --border-mid: #d1d5db;
+    --bg: #f9fafb;
+    --white: #ffffff;
+    --amber: #FFB31C;
+    --warn-bg: #fffdf0;
+    --warn-border: #f0d87a;
+    --radius: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--white);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+  }
+
+  .nav-logo-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .nav-logo-text span { color: var(--green); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.active { color: var(--text); border-bottom: 2px solid var(--green); padding-bottom: 2px; }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .page-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 1rem;
+  }
+
+  .page-hero h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    margin-bottom: 1rem;
+  }
+
+  .page-hero p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  /* ── JUMP CARDS ── */
+  .jump-section {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    padding: 1.75rem 2rem;
+  }
+
+  .jump-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .jump-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.85rem;
+  }
+
+  .jump-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.6rem;
+  }
+
+  .jump-card {
+    display: block;
+    padding: 0.85rem 1rem;
+    background: var(--white);
+    border: 1px solid var(--border-mid);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .jump-card:hover {
+    border-color: var(--green);
+    box-shadow: 0 1px 4px rgba(27,94,53,0.1);
+  }
+
+  .jump-card strong {
+    display: block;
+    font-size: 0.825rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+
+  .jump-card span {
+    font-size: 0.775rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  /* ── COLLAPSIBLE SECTIONS ── */
+  details {
+    border-bottom: 1px solid var(--border);
+  }
+
+  details > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1.4rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    user-select: none;
+  }
+
+  details > summary::-webkit-details-marker { display: none; }
+
+  .summary-left {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+  }
+
+  .summary-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+
+  .summary-title {
+    font-size: 0.975rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  details[open] > summary .summary-title { color: var(--green); }
+
+  .summary-hint {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .chevron {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--text-muted);
+    transition: transform 0.2s;
+  }
+
+  details[open] > summary .chevron { transform: rotate(180deg); }
+
+  /* ── SECTION BODY ── */
+  .section-body {
+    padding: 0.25rem 0 2rem 2.1rem;
+  }
+
+  .section-body > p {
+    font-size: 0.925rem;
+    color: var(--text-soft);
+    line-height: 1.75;
+    margin-bottom: 0.75rem;
+    max-width: 620px;
+  }
+
+  .section-body > p:last-child { margin-bottom: 0; }
+
+  .section-body h3 {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin: 1.75rem 0 0.65rem;
+  }
+
+  .section-body h3:first-child { margin-top: 0; }
+
+  .section-body a { color: var(--green); text-decoration: none; }
+  .section-body a:hover { text-decoration: underline; }
+
+  .section-body ul, .section-body ol {
+    padding-left: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-body li {
+    font-size: 0.925rem;
+    color: var(--text-soft);
+    margin-bottom: 0.35rem;
+    line-height: 1.65;
+    max-width: 600px;
+  }
+
+  .section-body em { color: var(--text-muted); font-style: italic; }
+
+  hr.rule { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+  /* ── PARAMS TABLE ── */
+  .params {
+    border: 1px solid var(--border-mid);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 0.75rem 0 1rem;
+    max-width: 440px;
+  }
+
+  .param-row {
+    display: grid;
+    grid-template-columns: 155px 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .param-row:last-child { border-bottom: none; }
+
+  .param-key {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    padding: 0.5rem 0.85rem;
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+  }
+
+  .param-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--green);
+    font-weight: 500;
+    padding: 0.5rem 0.85rem;
+  }
+
+  /* ── STEPS ── */
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 1rem;
+    max-width: 580px;
+  }
+
+  .steps li {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr;
+    gap: 0.6rem;
+    align-items: baseline;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--border);
+    margin: 0;
+  }
+
+  .steps li:last-child { border-bottom: none; }
+
+  .step-n {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .step-text {
+    font-size: 0.925rem;
+    color: var(--text-soft);
+    line-height: 1.6;
+  }
+
+  /* ── METADATA TABLE ── */
+  .meta-table {
+    border: 1px solid var(--border-mid);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 0.75rem 0;
+    max-width: 580px;
+  }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: 155px 1fr;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+
+  .meta-row:last-child { border-bottom: none; }
+
+  .meta-key {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    padding: 0.65rem 0.85rem;
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+    line-height: 1.5;
+  }
+
+  .meta-key.star { color: var(--green); font-weight: 500; }
+
+  .meta-val {
+    font-size: 0.875rem;
+    color: var(--text-soft);
+    padding: 0.65rem 0.85rem;
+    line-height: 1.5;
+  }
+
+  /* ── SOFTWARE COLS ── */
+  .sw-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    border: 1px solid var(--border-mid);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 0.75rem 0 1.25rem;
+    max-width: 640px;
+    background: var(--border-mid);
+  }
+
+  @media (max-width: 500px) { .sw-pair { grid-template-columns: 1fr; } }
+
+  .sw-col {
+    padding: 1rem 1.1rem;
+    background: var(--white);
+  }
+
+  .sw-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.15rem;
+  }
+
+  .sw-price {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--green);
+    margin-bottom: 0.65rem;
+    display: block;
+  }
+
+  .sw-col p {
+    font-size: 0.825rem !important;
+    color: var(--text-muted) !important;
+    margin: 0 0 0.4rem !important;
+    line-height: 1.55 !important;
+    max-width: none !important;
+  }
+
+  .sw-col p:last-child { margin-bottom: 0 !important; }
+
+  .sw-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.65rem 0 0;
+    border-top: 1px solid var(--border);
+    padding-top: 0.65rem;
+  }
+
+  .sw-col ul li {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    padding: 0.2rem 0;
+    margin: 0;
+    max-width: none;
+    line-height: 1.5;
+    border-bottom: none;
+  }
+
+  /* ── NOTE / WARN ── */
+  .note {
+    border-left: 2px solid var(--border-mid);
+    padding: 0.5rem 0.85rem;
+    margin: 0.75rem 0;
+    max-width: 580px;
+  }
+
+  .note p {
+    font-size: 0.875rem !important;
+    color: var(--text-muted) !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  .warn {
+    border-left: 2px solid var(--amber);
+    background: var(--warn-bg);
+    padding: 0.5rem 0.85rem;
+    margin: 0.75rem 0;
+    max-width: 580px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .warn p {
+    font-size: 0.875rem !important;
+    color: #5a4800 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  .sw-warn {
+    font-size: 0.78rem;
+    color: #5a4800;
+    background: var(--warn-bg);
+    border-left: 2px solid var(--amber);
+    border-radius: 0 3px 3px 0;
+    padding: 0.35rem 0.6rem;
+    margin-top: 0.65rem;
+    line-height: 1.5;
+  }
+
+  .sw-warn a { color: #5a4800; text-decoration: underline; }
+
+  /* ── INLINE LINK BUTTON ── */
+  .link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--green);
+    text-decoration: none;
+    border: 1px solid #b9d4be;
+    border-radius: 5px;
+    padding: 4px 10px;
+    margin-top: 0.35rem;
+    transition: background 0.1s, border-color 0.1s;
+    background: white;
+  }
+
+  .link-btn:hover {
+    background: var(--green-light);
+    border-color: var(--green);
+    text-decoration: none !important;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  footer a { color: var(--green); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="https://deadtrees.earth">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="11" cy="11" r="10" fill="#E8F3EB"/>
+      <path d="M11 17V10M11 10L8 13M11 10L14 13" stroke="#1B5E35" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M7 9C7 6.79 8.79 5 11 5C13.21 5 15 6.79 15 9C15 10.3 14.4 11.46 13.46 12.23" stroke="#1B5E35" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">dead<span>trees</span>.earth</span>
+  </a>
+  <div class="nav-links">
+    <a href="https://deadtrees.earth">Home</a>
+    <a href="https://deadtrees.earth/releases">Releases</a>
+    <a href="https://deadtrees.earth/profile">Upload data</a>
+    <a href="#" class="active">Drone guide</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-eyebrow">deadtrees.earth — Contributor Guide</div>
+  <h1>How to plan a <em>survey flight</em><br>for forest mortality mapping</h1>
+  <p>A step-by-step guide to collecting drone orthophoto data for forest mortality mapping. Your data directly calibrates AI models that track tree mortality at continental scale via satellite.</p>
+</div>
+
+<!-- JUMP CARDS -->
+<div class="jump-section">
+  <div class="jump-inner">
+    <div class="jump-label">Where are you starting from?</div>
+    <div class="jump-grid">
+      <a class="jump-card" href="#section-drone">
+        <strong>I need a drone</strong>
+        <span>Help me choose the right hardware</span>
+      </a>
+      <a class="jump-card" href="#section-software">
+        <strong>I have a drone</strong>
+        <span>Help me set up mapping software</span>
+      </a>
+      <a class="jump-card" href="#section-fly">
+        <strong>I have everything</strong>
+        <span>Ready to plan and fly my mission</span>
+      </a>
+      <a class="jump-card" href="#section-upload">
+        <strong>I have flight data</strong>
+        <span>Upload it to deadtrees.earth</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- SECTIONS -->
+<main>
+  <div class="jump-label"><br><br>How does this work?</div>
+
+  <!-- HOW IT WORKS intro blurb -->
+  <p style="padding: 1.75rem 0 0; font-size:0.925rem; color:var(--text-muted); max-width:620px; line-height:1.75;">
+    You'll go find some open green space with your drone — and ideally some friends — and programme a flight path with your mapping software. The actual drone flight is largely automated. Take some snacks. Once your drone returns with the data, you'll zip the files and upload them to the deadtrees.earth platform.
+  </p>
+
+  <!-- CHOOSING A DRONE -->
+  <details id="section-drone">
+    <summary>
+      <div class="summary-left">
+        <span class="summary-num">03</span>
+        <span class="summary-title">Choosing a drone</span>
+      </div>
+      <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+    </summary>
+    <div class="section-body">
+
+      <h3>Size and weight: know the limits</h3>
+      <p>In the UK and EU you must hold a valid flyer ID and operator ID to fly any drone over 250g outdoors. Some survey altitudes and locations require additional authorisation. Always check local regulations before flying: <a href="https://dronemaps24.org/" target="_blank">dronemaps24.org</a></p>
+      <p>Drones under 250g are generally exempt from registration requirements and don't require a pilot licence in most countries. The entire DJI Mini series is built to hit 249g exactly — this makes it a sensible choice.</p>
+
+      <h3>Recommendations</h3>
+      <p><strong>Easiest to get started:</strong> DJI Mini 3 or Mini 3 Pro with an Android phone running Dronelink. The mapping workflow is the most straightforward of any consumer option. Note that Dronelink uses a subscription model.</p>
+      <p><strong>Most cost-effective:</strong> Any drone supported by Litchi — Litchi has a one-off payment model rather than a subscription.</p>
+
+      <div class="warn"><p>If buying a DJI Mini, make sure you get the version with the standard RC-N1 controller — the one where your phone clips onto the front. The RC controller with a built-in screen may prevent mapping software from connecting.</p></div>
+
+    </div>
+  </details>
+
+  <!-- MAPPING SOFTWARE -->
+  <details id="section-software">
+    <summary>
+      <div class="summary-left">
+        <span class="summary-num">04</span>
+        <span class="summary-title">Mapping software</span>
+      </div>
+      <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+    </summary>
+    <div class="section-body">
+
+      <p>Mapping software is separate from your drone's own app (e.g. DJI Fly). It's what you use to plan the grid flight path and execute it automatically.</p>
+
+      <div class="sw-pair">
+        <div class="sw-col">
+          <div class="sw-name">Dronelink</div>
+          <span class="sw-price">subscription / one-off from ~€60</span>
+          <p>Dronelink is a drone mission planning and automation app. It lets you map a grid over a chosen area, set your flight parameters, and execute the mission automatically. It runs alongside DJI Fly in the background.</p>
+          <p>A Hobbyist plan (one-off, ~€60) is enough for flat terrain. A Professional subscription is required for terrain awareness, which matters in mountainous regions. See <a href="https://app.dronelink.com/pricing" target="_blank">pricing</a>.</p>
+          <ul>
+            <li>DJI Mini 4 Pro <em>(Android)</em></li>
+            <li>DJI Mini 3 &amp; Mini 3 Pro <em>(Android)</em></li>
+            <li>DJI Mini 2 <em>(Android &amp; iOS)</em></li>
+            <li>DJI Mini / Mini SE <em>(Android &amp; iOS)</em></li>
+            <li>DJI Air 2S <em>(Android &amp; iOS)</em></li>
+            <li>DJI Phantom 3 &amp; 4 Series <em>(Android &amp; iOS)</em></li>
+            <li>DJI Air 2 <em>(Android &amp; iOS)</em></li>
+            <li>DJI Mavic 2 Dual / Pro / Zoom <em>(Android &amp; iOS)</em></li>
+            <li>DJI Mavic Pro Series <em>(Android &amp; iOS)</em></li>
+            <li><a href="https://www.dronelink.com/supported-drones" target="_blank">...and more</a></li>
+          </ul>
+          <div class="sw-warn">Download from the <a href="https://www.dronelink.com/download" target="_blank">website only</a> — not the app store.</div>
+        </div>
+        <div class="sw-col">
+          <div class="sw-name">Litchi</div>
+          <span class="sw-price">one-off ~€29</span>
+          <p>Litchi is an alternative option with a one-off payment model. Missions are planned in advance on your computer via Litchi Hub, then synced to the app on your phone for the field.</p>
+          <p>Plan at <a href="https://hub.flylitchi.com/" target="_blank">hub.flylitchi.com</a> · <a href="https://parse.litchiapi.com/app/com.flylitchi.litchipilot.dji/beta/latest" target="_blank">download Litchi Pilot</a></p>
+          <ul>
+            <li>DJI Mini 4 Pro</li>
+            <li>DJI Mini 3 &amp; Mini 3 Pro</li>
+            <li>DJI Matrice 4 (4E, 4T, 4D, 4TD)</li>
+            <li>DJI Mavic 3 Enterprise (3E, 3T, 3M)</li>
+            <li>DJI Matrice 30</li>
+            <li>DJI Matrice 300 &amp; 350 RTK</li>
+            <li>DJI Matrice 400</li>
+          </ul>
+          <p style="margin-top:0.65rem !important; font-size:0.78rem !important;">iOS: <a href="https://help.dronedeploy.com/hc/en-us/articles/1500004964842-Recommended-and-Supported-drones" target="_blank">DroneDeploy</a> supports a subset of older drones.</p>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+  <!-- PLANNING & FLYING -->
+  <details open id="section-fly">
+    <summary>
+      <div class="summary-left">
+        <span class="summary-num">01</span>
+        <span class="summary-title">Planning &amp; flying your mission</span>
+      </div>
+      <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+    </summary>
+    <div class="section-body">
+
+      <h3>Mission settings</h3>
+      <p>In your mapping app, select the area you want to cover. Try to cover about 10–15 hectares — for DJI Mini drones, that's about how much you'll get per battery. Plan your flight grid to follow the terrain gradient rather than cutting across it to save battery and reduce altitude changes. Position yourself at the highest point of the mission area before launching.</p>
+      <p>Don't worry if the drone returns before completing the mission — all captured data is usable.</p>
+
+      <p>When you programme your flight path, use these parameters:</p>
+
+      <div class="params">
+        <div class="param-row"><div class="param-key">Front overlap</div><div class="param-val">90%</div></div>
+        <div class="param-row"><div class="param-key">Side overlap</div><div class="param-val">80%</div></div>
+        <div class="param-row"><div class="param-key">Flight height</div><div class="param-val">80–120m (relative to ground)</div></div>
+        <div class="param-row"><div class="param-key">Gimbal pitch</div><div class="param-val">-90° (straight down)</div></div>
+        <div class="param-row"><div class="param-key">White balance</div><div class="param-val">Fixed — not Auto</div></div>
+        <div class="param-row"><div class="param-key">Photo format</div><div class="param-val">JPEG</div></div>
+      </div>
+
+      <p>Everything else can stay at default settings.</p>
+
+      <div class="warn"><p>Do not fly above 120m above take-off elevation without checking local regulations — this usually requires a special permit. Some drones also enforce a 120m software ceiling above take-off elevation, so in hilly terrain position yourself at the highest point before launching.</p></div>
+
+      <hr class="rule">
+      <h3>Before you fly — first time ever</h3>
+      <ul>
+        <li>Check whether your drone needs to be registered in your country and whether you need a licence: <a href="https://dronemaps24.org/" target="_blank">dronemaps24.org</a></li>
+        <li>Practise flying manually in DJI Fly before attempting any automated mission — get comfortable with takeoff, landing, and basic controls.</li>
+        <li>Locate the return-to-home button on your remote controller before you fly, so you can recall the drone quickly if needed.</li>
+      </ul>
+
+      <h3>Before every flight</h3>
+      <ul>
+        <li>For optimal results, head out on a cloudy day. Cloud cover diffuses light evenly and eliminates shadows, which significantly improves orthophoto quality.</li>
+        <li>Choose your take-off point so you have a direct line of sight to the drone throughout the flight. Some trees are fine; disappearing behind a hill is not.</li>
+        <li>Check battery charge on both drone and controller.</li>
+        <li>Confirm GPS lock before launching.</li>
+      </ul>
+
+      <hr class="rule">
+      <h3>Executing the mission (Dronelink)</h3>
+      <p><em>Instructions for Litchi are coming soon.</em></p>
+
+      <ol class="steps">
+        <li><span class="step-n">1</span><span class="step-text">Power on the controller and drone.</span></li>
+        <li><span class="step-n">2</span><span class="step-text">Open DJI Fly first — confirm the camera feed is showing. This establishes the connection to the drone.</span></li>
+        <li><span class="step-n">3</span><span class="step-text">Switch to Dronelink, leaving DJI Fly running in the background. Dronelink talks to the drone through DJI Fly.</span></li>
+        <li><span class="step-n">4</span><span class="step-text">Open your saved mission in Dronelink.</span></li>
+        <li><span class="step-n">5</span><span class="step-text">Wait for GPS lock — aim for 10+ satellites before proceeding.</span></li>
+        <li><span class="step-n">6</span><span class="step-text">Note your launch point. This is where the drone will return automatically if it loses signal or battery gets critically low.</span></li>
+        <li><span class="step-n">7</span><span class="step-text">Tap Fly / Execute. Review the pre-flight summary — altitude, area, estimated time — and confirm.</span></li>
+        <li><span class="step-n">8</span><span class="step-text">The drone takes off and flies the grid automatically. Monitor it and keep an eye on battery throughout.</span></li>
+      </ol>
+
+      <h3>Taking back manual control</h3>
+      <p>The flight is automatic once started, but stay alert. To intervene: tap <strong>Pause</strong> in Dronelink — the drone will hover and the controller sticks reactivate, giving you manual control. If the drone is behaving alarmingly and you need to act immediately, hold the <strong>return-to-home button</strong> on the controller (the house icon) — this overrides everything and brings it straight back.</p>
+
+      <h3>Battery management</h3>
+      <p>The drone warns you when battery is low and returns home automatically if you don't act. Try to land at 20% or above — you can't anticipate windy conditions. To resume after a battery swap, replace the battery and press play. The drone will return to where it last took a photo and continue.</p>
+
+      <h3>Landing</h3>
+      <p>Land manually — GPS isn't precise enough for an exact automatic landing. When the drone is hovering nearby at mission end, take over manually and bring it down with the controller.</p>
+
+      <h3>Losing connection</h3>
+      <p>If the drone loses connection with the remote, it will automatically return to its take-off point.</p>
+
+      <div class="note"><p>Always check local flight restrictions before flying: <a href="https://dronemaps24.org/" target="_blank">dronemaps24.org</a></p></div>
+
+    </div>
+  </details>
+
+  <!-- UPLOADING -->
+  <details id="section-upload">
+    <summary>
+      <div class="summary-left">
+        <span class="summary-num">02</span>
+        <span class="summary-title">Contributing to deadtrees.earth</span>
+      </div>
+      <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+    </summary>
+    <div class="section-body">
+
+      <p>Once your mission is complete, return to base! deadtrees.earth processes your raw images into an orthophoto automatically — you don't need to do this yourself.</p>
+
+      <ol class="steps">
+        <li><span class="step-n">1</span><span class="step-text">Pull all raw images from the drone's SD card to your computer. Keep each flight's images in a separate folder.</span></li>
+        <li><span class="step-n">2</span><span class="step-text">Zip the entire folder into a single archive (.zip).</span></li>
+        <li><span class="step-n">3</span><span class="step-text">Go to <a href="https://deadtrees.earth/profile" target="_blank">deadtrees.earth/profile</a> and log in or register.</span></li>
+        <li><span class="step-n">4</span><span class="step-text">Press Upload and fill in the metadata form (see below).</span></li>
+        <li><span class="step-n">5</span><span class="step-text">Submit. Your data will be processed automatically and made available to the global research community. Come back when processing is complete to see what you've made!</span></li>
+      </ol>
+
+      <h3>Metadata fields</h3>
+
+      <div class="meta-table">
+        <div class="meta-row">
+          <div class="meta-key star">Acquisition date ★</div>
+          <div class="meta-val">The date of the flight — not the upload date. This is the most important field.</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-key">Authors</div>
+          <div class="meta-val">Your name, and anyone who helped.</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-key">Platform</div>
+          <div class="meta-val">Leave as Drone. "Airborne" refers to fixed-wing aircraft.</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-key">DOI</div>
+          <div class="meta-val">Only relevant if linking a research publication. Leave blank otherwise.</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-key">Additional info</div>
+          <div class="meta-val">Optional but useful — drone model, weather conditions, dominant tree species, suspected mortality cause.</div>
+        </div>
+      </div>
+
+    </div>
+  </details>
+
+</main>
+
+<footer>
+  <span>Part of the <a href="https://deadtrees.earth">deadtrees.earth</a> open science project</span>
+  <span><a href="https://deadtrees.earth/profile">Upload data</a> · <a href="https://deadtrees.earth/releases">Releases</a></span>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      const d = target.tagName === 'DETAILS' ? target : target.closest('details');
+      if (d) d.open = true;
+      setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+    });
+  });
+</script>
+
+</body>
+</html>
