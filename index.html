@@ -510,6 +510,115 @@
     text-decoration: none !important;
   }
 
+   
+  /* ── CONTACT FORM ── */
+  .contact-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem 3rem;
+  }
+ 
+  .contact-box {
+    border: 1px solid var(--border-mid);
+    border-radius: var(--radius);
+    background: var(--bg);
+    padding: 1.75rem 1.75rem 1.5rem;
+  }
+ 
+  .contact-box-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+  }
+ 
+  .contact-box-sub {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+    max-width: 560px;
+  }
+ 
+  .contact-box-sub a { color: var(--green); }
+ 
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    max-width: 480px;
+  }
+ 
+  .form-field label {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+  }
+ 
+  .form-field input,
+  .form-field textarea {
+    width: 100%;
+    border: 1px solid var(--border-mid);
+    border-radius: 6px;
+    padding: 0.6rem 0.75rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: var(--text);
+    background: var(--white);
+    transition: border-color 0.15s;
+  }
+ 
+  .form-field input:focus,
+  .form-field textarea:focus {
+    outline: none;
+    border-color: var(--green);
+  }
+ 
+  .form-field textarea {
+    resize: vertical;
+    min-height: 90px;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+  }
+ 
+  .form-submit {
+    align-self: flex-start;
+    background: var(--green);
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: 6px;
+    padding: 0.6rem 1.4rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-top: 0.2rem;
+  }
+ 
+  .form-submit:hover { background: var(--green-dark); }
+ 
+  .form-note {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+ 
+  .form-note a { color: var(--green); }
+ 
+  .form-status {
+    font-size: 0.825rem;
+    margin-top: 0.5rem;
+    display: none;
+  }
+ 
+  .form-status.success { color: var(--green); display: block; }
+  .form-status.error { color: #c0392b; display: block; }
+
+
   /* ── FOOTER ── */
   footer {
     border-top: 1px solid var(--border);
@@ -543,8 +652,8 @@
 <!-- HERO -->
 <div class="page-hero">
   <div class="page-eyebrow">deadtrees.earth — Contributor Guide</div>
-  <h1>How to plan a <em>survey flight</em>for forest mortality mapping</h1>
-  <p>Contribute drone imagery of your local forest or green space to help monitor tree mortality and forest health using AI. This guide will help you plan and execute a survey flight.</p>
+  <h1>How to plan a <em>survey flight</em> for forest mapping</h1>
+  <p>Contribute drone imagery of your local forest or green space to help monitor tree and forest health using AI. This guide will help you plan and execute a mission to contribute to global forest research.</p>
 </div>
 
 <!-- JUMP CARDS -->
@@ -575,7 +684,6 @@
 <!-- SECTIONS -->
 <main>
 
-
   <!-- CHOOSING A DRONE -->
   <details id="section-why">
     <summary>
@@ -586,15 +694,15 @@
     </summary>
     <div class="section-body">
 
-      <h3>Why do wee need this data?</h3>
-      <p>Forests die tree by tree. Unlike large scale deforestation, which can be mapped and monitored by satellites, individual tree deaths are dispersed throughout the forest and impossible to identify from space. Even the highest-resolution satellite image analysis can’t reliably tell the difference between a dead tree and a rock. The sort of precision that scientists need to monitor forest health requires single-digit centimeter resolution - and for that you need a low-flying drone. This is where you come in. <br><br>
+      <h3>Why do we need this data?</h3>
+      <p>Forests die tree by tree. Unlike large scale deforestation, which can be mapped and monitored by satellites, individual tree deaths are dispersed throughout the forest. The European Space Agency’s Sentinel satellite fleet provides free global coverage of the world’s forests, but this data doesn’t offer high enough resolution to identify individual dead trees in a forest canopy. That sort of precision requires single-digit centimeter resolution – and for that you need a low-flying drone.  This is where you come in. <br><br>
 
-      The deadtrees.earth project uses high resolution data gathered by drone pilots like you to train two sequential AI models. The first detects standing deadwood in high-resolution orthophotos. The second is trained on the output of the first, scaling up the signal so that scientists can measure the fraction of dead trees within a 10m2 square pixel of multispectral satellite data. 
+      The deadtrees.earth project uses high resolution data gathered by drone pilots like you to train two sequential AI models. The first detects standing deadwood in high-resolution orthophotos. The second is trained on the output of the first, scaling up the signal so that scientists can measure the fraction of dead trees within a 10m2 square pixel of multispectral satellite data. <br><br>
       These models give scientists unprecedented ability to monitor and analyse forest health, but we need more data to make the model reliable and accurate across all the different  ecosystems and forest types in the world.<br><br>
 
       <h3>A call for drone pilots</h3>
 
-      If you would like to help, you'll need a drone, some mapping software, and an open green space with some trees. Programme a flight path in your mapping sofrware, grab a friend, and head out to conduct your survey flight. Once you're done, zip the files and upload them to the deadtrees.earth platform. As well as contributing to a worldwide forest research project, you'll also get free orthophotoprocessing and an analysis of your local forest.<br><br></p>
+      <p>If you would like to help, you'll need a drone, some mapping software, and an open green space with some trees. Programme a flight path in your mapping software, pick a destination, and head out to conduct your survey flight. Once you're done, zip the files and upload them to the deadtrees.earth platform. As well as contributing to a worldwide forest research project, you'll also get free orthophoto processing and a map of the dead trees in your local forest. If you <br><br></p>
 
       <div class="warn"><p>This is a first iteration of the drone mapping guide. It assumes you're using a DJI drone, such as a DJI Mini or Mini 3 Pro, with an Android phone running Dronelink. Further information for alternative drone manufacturers and software options is forthcoming. Feel free to make a pull request on this repository if you would like to contribute and improve the guide.</p></div>
 
@@ -638,7 +746,7 @@
         <div class="sw-col">
           <div class="sw-name">Dronelink</div>
           <span class="sw-price">subscription / one-off from ~€60</span>
-          <p>Dronelink is a drone mission planning and automation app. It lets you map a grid over a chosen area, set your flight parameters, and execute the mission automatically. It runs alongside DJI Fly in the background.</p>
+          <p>Dronelink is a drone mission planning and automation app. It lets you map a grid over a chosen area, set your flight parameters, and execute the mission automatically.</p>
           <p>A Hobbyist plan (one-off, ~€60) is enough for flat terrain. A Professional subscription is required for terrain awareness, which matters in mountainous regions. See <a href="https://app.dronelink.com/pricing" target="_blank">pricing</a>.</p>
           <ul>
             <li>DJI Mini 4 Pro <em>(Android)</em></li>
@@ -650,7 +758,7 @@
             <li>DJI Air 2 <em>(Android &amp; iOS)</em></li>
             <li>DJI Mavic 2 Dual / Pro / Zoom <em>(Android &amp; iOS)</em></li>
             <li>DJI Mavic Pro Series <em>(Android &amp; iOS)</em></li>
-            <li><a href="https://www.dronelink.com/supported-drones" target="_blank">...and more</a></li>
+            <li><a href="https://www.dronelink.com/supported-drones" target="_blank">...see all compatible drones.</a></li>
           </ul>
           <div class="sw-warn">Download from the <a href="https://www.dronelink.com/download" target="_blank">website only</a> — not the app store.</div>
         </div>
@@ -658,7 +766,6 @@
           <div class="sw-name">Litchi</div>
           <span class="sw-price">one-off ~€29</span>
           <p>Litchi is an alternative option with a one-off payment model. Missions are planned in advance on your computer via Litchi Hub, then synced to the app on your phone for the field. For some drones you can export the mission and import it to your RC controller directly.</p>
-          <p>Plan at <a href="https://hub.flylitchi.com/" target="_blank">hub.flylitchi.com</a> · <a href="https://parse.litchiapi.com/app/com.flylitchi.litchipilot.dji/beta/latest" target="_blank">download Litchi Pilot</a></p>
           <ul>
             <li>DJI Mini 4 Pro</li>
             <li>DJI Mini 3 &amp; Mini 3 Pro</li>
@@ -667,6 +774,8 @@
             <li>DJI Matrice 30</li>
             <li>DJI Matrice 300 &amp; 350 RTK</li>
             <li>DJI Matrice 400</li>
+            <li><a href="https://www.litchiutilities.com/docs/waypoint.php" target="_blank">...see all compatible drones.</a></li>
+            <div class="sw-warn"><p>Plan at <a href="https://hub.flylitchi.com/" target="_blank">hub.flylitchi.com</a> · <a href="https://parse.litchiapi.com/app/com.flylitchi.litchipilot.dji/beta/latest" target="_blank">download Litchi Pilot</a></p></div>
           </ul>
         </div>
       </div>
@@ -688,8 +797,7 @@
       <p>This assumes you have a drone, mapping software, and a phone that works with both.</p>
 
       <h3>Mission settings</h3>
-      <p>In your mapping app, select the area you want to cover. Try to cover about 10-15 hectares. For DJI Mini drones, that's about how much you'll get per battery. To reduce altitude changes and get the most out of your battery, plan your flight grid to follow the terrain gradient rather than cutting across it, and try to position yourself at the highest point of the mission area before launching. Some drones, like the DJI Mini 3, have a software-enforced 120m ceiling above take-off elevation. You don't want to fly above that height anyway; in most areas, local regulations require special permits to do so.</p>
-      <p>Don't worry if the drone returns before completing the mission — all captured data is usable.</p>
+      <p>In your mapping app, select the area you want to cover. Try to cover about 10-15 hectares. For most consumer drones, that's about how much you'll get per battery. To reduce altitude changes and get the most out of your battery, plan your flight grid to follow the terrain gradient rather than cutting across it.</p>
 
       <p>When you programme your flight path, use these parameters:</p>
 
@@ -704,16 +812,19 @@
 
       <p>Everything else can stay at default settings.</p>
 
-      <div class="warn"><p>Do not fly above 120m above take-off elevation without checking local regulations — this usually requires a special permit. Some drones also enforce a 120m software ceiling above take-off elevation, so in hilly terrain position yourself at the highest point before launching.</p></div>
+      <div class="warn"><p>Do not fly above 120m without checking local regulations — this usually requires a special permit. Some drones have a 120m software ceiling built in.</p></div>
 
       <h3>The flight</h3>
+
+      <p>Always check local flight restrictions before flying: <a href="https://dronemaps24.org/" target="_blank">dronemaps24.org</a>.</p>
+
       <p>For optimal results, head out on a cloudy day. Cloudy conditions are better than sunny conditions because cloud cover diffuses light evenly and eliminates shadows, which significantly improves orthophoto quality. <br><br>
         
-        Before you attempt an automated mission, practice flying manually in DJI Fly to ensure you're comfortable with takeoff, landing, and basic controls. Make sure you've identified the return-to-home button on the remote, so you can recall the drone if it starts to behave alarmingly.<br><br>
-        
-        Choose your take-off point so you have a direct line of sight to the drone throughout the flight. The remote controller must maintain connection the entire time. Some trees are fine; disappearing behind a hill is not! Check the battery charge on both the drone and the controller, and confirm that the GPS lock is on before you launch. <br><br> 
+      Before you attempt an automated mission, practice flying manually to ensure you're comfortable with takeoff, landing, and basic controls. Make sure you've identified the return-to-home button on the remote, so you can recall the drone if it starts to behave alarmingly.<br><br>
       
-        The flight is automatic once started, but stay alert; your job is to monitor and be ready to intervene. If you need to take back manual control of the drone, press pause in Dronelink and the controller sticks on your remote will reactivate. Now you're flying the drone manually again.<br></p>
+      Choose your take-off point so you have a direct line of sight to the drone throughout the flight. The remote controller must maintain connection the entire time. Some trees are fine; disappearing behind a hill is not! If you're mapping hilly terrain, bear in mind that some drones have a software-enforced 120m ceiling above take-off elevation, so consider positioning yourself higher on the slope for launching.<br><br> 
+    
+      The flight is automatic once started, but stay alert; your job is to monitor and be ready to intervene. If you need to take back manual control of the drone, press pause in Dronelink and the controller sticks on your remote will reactivate. Now you're flying the drone manually again.<br></p><p>Don't worry if the drone returns before completing the mission — all captured data is usable.</p>
 
       <hr class="rule">
       <h3>Executing the mission (Dronelink)</h3>
@@ -721,13 +832,12 @@
 
       <ol class="steps">
         <li><span class="step-n">1</span><span class="step-text">Power on the controller and drone.</span></li>
-        <li><span class="step-n">2</span><span class="step-text">Open DJI Fly first — confirm the camera feed is showing. This establishes the connection to the drone.</span></li>
-        <li><span class="step-n">3</span><span class="step-text">Switch to Dronelink, leaving DJI Fly running in the background. Dronelink talks to the drone through DJI Fly.</span></li>
-        <li><span class="step-n">4</span><span class="step-text">Open your saved mission in Dronelink.</span></li>
-        <li><span class="step-n">5</span><span class="step-text">Wait for GPS lock — aim for 10+ satellites before proceeding.</span></li>
-        <li><span class="step-n">6</span><span class="step-text">Note your launch point. This is where the drone will return automatically if it loses signal or battery gets critically low.</span></li>
-        <li><span class="step-n">7</span><span class="step-text">Tap Fly / Execute. Review the pre-flight summary — altitude, area, estimated time — and confirm.</span></li>
-        <li><span class="step-n">8</span><span class="step-text">The drone takes off and flies the grid automatically. Monitor it and keep an eye on battery throughout.</span></li>
+        <li><span class="step-n">2</span><span class="step-text">Open Dronelink, keeping DJI Fly running in the background. Dronelink talks to the drone through DJI Fly.</span></li>
+        <li><span class="step-n">3</span><span class="step-text">Open your saved mission in Dronelink.</span></li>
+        <li><span class="step-n">4</span><span class="step-text">Wait for GPS lock — aim for 10+ satellites before proceeding.</span></li>
+        <li><span class="step-n">5</span><span class="step-text">Note your launch point. This is where the drone will return automatically if it loses signal or battery gets critically low.</span></li>
+        <li><span class="step-n">6</span><span class="step-text">Tap Fly / Execute. Review the pre-flight summary — altitude, area, estimated time — and confirm.</span></li>
+        <li><span class="step-n">7</span><span class="step-text">The drone takes off and flies the grid automatically. Monitor it and keep an eye on battery throughout.</span></li>
       </ol>
 
 
@@ -741,7 +851,7 @@
       <h3>Losing connection</h3>
       <p>If the drone loses connection with the remote, it will automatically return to its take-off point.</p>
 
-      <div class="note"><p>Always check local flight restrictions before flying: <a href="https://dronemaps24.org/" target="_blank">dronemaps24.org</a></p></div>
+  
 
     </div>
   </details>
@@ -761,7 +871,7 @@
 
       <ol class="steps">
         <li><span class="step-n">1</span><span class="step-text">Pull all raw images from the drone's SD card to your computer. Keep each flight's images in a separate folder.</span></li>
-        <li><span class="step-n">2</span><span class="step-text">Zip the entire folder into a single archive (.zip).</span></li>
+        <li><span class="step-n">2</span><span class="step-text">Zip each flight's folder into a single archive (.zip), so that there's one zip file per flight.</span></li>
         <li><span class="step-n">3</span><span class="step-text">Go to <a href="https://deadtrees.earth/profile" target="_blank">deadtrees.earth/profile</a> and log in or register.</span></li>
         <li><span class="step-n">4</span><span class="step-text">Press Upload and fill in the metadata form (see below).</span></li>
         <li><span class="step-n">5</span><span class="step-text">Submit. Your data will be processed automatically and made available to the global research community. Come back when processing is complete to see what you've made!</span></li>
@@ -788,14 +898,44 @@
         </div>
         <div class="meta-row">
           <div class="meta-key">Additional info</div>
-          <div class="meta-val">Optional but useful — drone model, weather conditions, dominant tree species, suspected mortality cause.</div>
+          <div class="meta-val">Optional but useful — drone model, weather conditions, dominant tree species, suspected cause of death.</div>
         </div>
       </div>
 
     </div>
   </details>
+  <!-- FEEDBACK -->
+  <details id="section-feedback">
+    <summary>
+      <div class="summary-left">
+        <span class="summary-num">04</span>
+        <span class="summary-title">Questions and feedback</span>
+      </div>
+      <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+    </summary>
+    <div class="section-body">
+        <p class="contact-box-sub">Do you have a question? Did we leave something important out of the guide? Drop us a line and we'll write back to you. If you've mapped with a different drone or mapping software, and would like to contribute instructions for others,  please write to us or alternatively feel free to open a pull request on the <a href="https://github.com/sarahhabershon/deadtrees_mapping_guide/tree/main" target="_blank">guide's repository</a> instead.</p>
+    
+        <form class="contact-form" id="guide-feedback-form">
+          <input type="hidden" name="_subject" value="Drone mapping guide — feedback">
+          <div class="form-field">
+            <label for="feedback-email">Your email</label>
+            <input type="email" id="feedback-email" name="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-field">
+            <label for="feedback-message">Your question or feedback</label>
+            <textarea id="feedback-message" name="message" placeholder="Got a question?" required></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send</button>
+          <div class="form-status" id="form-status"></div>
+        </form>
+  </details>
+  
 
 </main>
+
+
+
 
 <footer>
   <span>Part of the <a href="https://deadtrees.earth">deadtrees.earth</a> open science project</span>
@@ -813,7 +953,45 @@
       setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
     });
   });
+ 
+  // Feedback form submission via Formspree
+  const feedbackForm = document.getElementById('guide-feedback-form');
+  const formStatus = document.getElementById('form-status');
+ 
+
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpqgllrn';
+ 
+  feedbackForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+ 
+    const submitBtn = feedbackForm.querySelector('.form-submit');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+    formStatus.className = 'form-status';
+    formStatus.textContent = '';
+ 
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(feedbackForm)
+      });
+ 
+      if (!response.ok) throw new Error('Request failed');
+ 
+      formStatus.textContent = "Thanks — we'll get back to you soon.";
+      formStatus.className = 'form-status success';
+      feedbackForm.reset();
+    } catch (err) {
+      formStatus.textContent = "Something went wrong. Please try again, or email us directly at sarah.habershon@uni-leipzig.de.";
+      formStatus.className = 'form-status error';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send';
+    }
+  });
 </script>
+
 
 </body>
 </html>
