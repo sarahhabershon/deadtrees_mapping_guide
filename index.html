@@ -110,6 +110,14 @@
     margin: 0 auto;
   }
 
+  .strip-image {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    height: auto;
+  }
+
   /* ── JUMP CARDS ── */
   .jump-section {
     border-top: 1px solid var(--border);
@@ -653,7 +661,11 @@
 <div class="page-hero">
   <div class="page-eyebrow">deadtrees.earth — Contributor Guide</div>
   <h1>How to plan a <em>survey flight</em> for forest mapping</h1>
-  <p>Contribute drone imagery of your local forest or green space to help monitor tree and forest health using AI. This guide will help you plan and execute a mission to contribute to global forest research.</p>
+ 
+
+<img src="strip.png" class="strip-image" alt="Comic strip illustrating the drone mapping workflow">
+
+ <p>Contribute drone imagery of your local forest or green space to help monitor tree and forest health using AI. This guide will help you plan and execute a mission to contribute to global forest research.</p>
 </div>
 
 <!-- JUMP CARDS -->
@@ -695,16 +707,16 @@
     <div class="section-body">
 
       <h3>Why do we need this data?</h3>
-      <p>Forests die tree by tree. Unlike large scale deforestation, which can be mapped and monitored by satellites, individual tree deaths are dispersed throughout the forest. The European Space Agency’s Sentinel satellite fleet provides free global coverage of the world’s forests, but this data doesn’t offer high enough resolution to identify individual dead trees in a forest canopy. That sort of precision requires single-digit centimeter resolution – and for that you need a low-flying drone.  This is where you come in. <br><br>
+      <p>Forest decline is one of the most urgent problems in ecology, but its causes are very complex and hard to measure and understand. Forests die tree by tree. Unlike large scale deforestation, which can be mapped and monitored by satellites, individual tree deaths are dispersed throughout the forest. The European Space Agency’s Sentinel satellite fleet provides free global coverage of the world’s forests, but this data doesn’t offer high enough resolution to identify individual dead trees in a forest canopy. That sort of precision requires single-digit centimeter resolution – and for that you need a low-flying drone.  This is where you come in. <br><br>
 
-      The deadtrees.earth project uses high resolution data gathered by drone pilots like you to train two sequential AI models. The first detects standing deadwood in high-resolution orthophotos. The second is trained on the output of the first, scaling up the signal so that scientists can measure the fraction of dead trees within a 10m2 square pixel of multispectral satellite data. <br><br>
-      These models give scientists unprecedented ability to monitor and analyse forest health, but we need more data to make the model reliable and accurate across all the different  ecosystems and forest types in the world.<br><br>
+      The deadtrees.earth project uses high resolution data gathered by drone pilots like you to train two sequential AI models. The first detects tree cover, and identifies dead trees. The second is trained on the output of the first, to scale up the signal to the global reach of the Sentinel satellites.<br><br>
+      These models give scientists unprecedented ability to monitor and analyse forest health, but to complete the satellite map for the whole world, we first need to gather enough training data to make the model reliable and accurate across all the world's different ecosystems and forest types.<br><br>
 
       <h3>A call for drone pilots</h3>
 
-      <p>If you would like to help, you'll need a drone, some mapping software, and an open green space with some trees. Programme a flight path in your mapping software, pick a destination, and head out to conduct your survey flight. Once you're done, zip the files and upload them to the deadtrees.earth platform. As well as contributing to a worldwide forest research project, you'll also get free orthophoto processing and a map of the dead trees in your local forest. If you <br><br></p>
+      <p>If you would like to help, you'll need a drone, some mapping software, and an open green space with some trees. Programme a flight path in your mapping software, pick a destination, and head out to conduct your survey flight. Once you're done, zip the files and upload them to the deadtrees.earth platform. As well as contributing to a worldwide forest research project, you'll also get free orthophoto processing and a map of the dead trees in your local forest.<br><br></p>
 
-      <div class="warn"><p>This is a first iteration of the drone mapping guide. It assumes you're using a DJI drone, such as a DJI Mini or Mini 3 Pro, with an Android phone running Dronelink. Further information for alternative drone manufacturers and software options is forthcoming. Feel free to make a pull request on this repository if you would like to contribute and improve the guide.</p></div>
+      <div class="warn"><p>This is a first iteration of the drone mapping guide. It assumes you're using a consumer drone, such as a DJI Mini or Mini 3 Pro, with an Android phone running Dronelink. Further information for alternative drone manufacturers and software options is forthcoming. Feel free to make a pull request on this repository if you would like to contribute and improve the guide.</p></div>
 
     </div>
   </details>  
@@ -817,8 +829,6 @@
       <h3>The flight</h3>
 
       <p>Always check local flight restrictions before flying: <a href="https://dronemaps24.org/" target="_blank">dronemaps24.org</a>.</p>
-
-      <p>For optimal results, head out on a cloudy day. Cloudy conditions are better than sunny conditions because cloud cover diffuses light evenly and eliminates shadows, which significantly improves orthophoto quality. <br><br>
         
       Before you attempt an automated mission, practice flying manually to ensure you're comfortable with takeoff, landing, and basic controls. Make sure you've identified the return-to-home button on the remote, so you can recall the drone if it starts to behave alarmingly.<br><br>
       
@@ -843,13 +853,10 @@
 
 
       <h3>Battery management</h3>
-      <p>The drone warns you when battery is low and will return to home automatically if you don't act. Try to have the drone grounded at minimum 20% battery. To continue a mission after a battery swap just replace the battery and press play — the drone will return to where it last captured images and resume its mission.</p>
+      <p>The drone warns you when battery is low. Try to have the drone grounded at minimum 20% battery to keep it safe. To continue a mission after a battery swap just replace the battery and press play — the drone will return to where it last captured images and resume its mission.</p>
 
       <h3>Landing</h3>
-      <p>Land manually — GPS is not precise enough for an automatic landing at a precise spot. When the mission ends and the drone is hovering nearby, take over manually and bring it down with the controller.</p>
-
-      <h3>Losing connection</h3>
-      <p>If the drone loses connection with the remote, it will automatically return to its take-off point.</p>
+      <p>If you're using a consumer drone, it's safest to land manually — GPS is not precise enough for an automatic landing at a precise spot. When the mission ends and the drone is hovering nearby, take over manually and bring it down with the controller.</p>
 
   
 
@@ -867,7 +874,9 @@
     </summary>
     <div class="section-body">
 
-      <p>Once your mission is complete, return to base! deadtrees.earth processes your raw images into an orthophoto automatically — you don't need to do this yourself.</p>
+      <p>Once your mission is complete, return to base! Upload the data you've collected to deadtrees.earth for orthomosaic processing and tree identification.</p>
+
+      <img src="strip2.png" class="strip-image" alt="Comic strip illustrating how orthophotos are made">
 
       <ol class="steps">
         <li><span class="step-n">1</span><span class="step-text">Pull all raw images from the drone's SD card to your computer. Keep each flight's images in a separate folder.</span></li>
@@ -901,6 +910,8 @@
           <div class="meta-val">Optional but useful — drone model, weather conditions, dominant tree species, suspected cause of death.</div>
         </div>
       </div>
+
+      <p>Once the processing is complete, take a look at the results in the Drone data archive. The platform processes your data into an orthomosaic, identifies tree cover, and highlights dead trees. If you use the platform for your own project, whether it's monitoring tree health in your neighborhood, monitoring a forestry block, or estimating shade cover in your city, we would love to hear about it!</p>
 
     </div>
   </details>
